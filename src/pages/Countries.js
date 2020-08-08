@@ -2,15 +2,42 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Data from "../data/Data";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import styled from "styled-components";
+
+const Div = styled.div`
+    display: flex;
+    flex-flow: row;
+    padding: 15vh 5vw 15vh 5vw;
+`;
+const Cards = styled.section`
+    height: 20vh;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 60px;
+    list-style: none;
+    div {
+    }
+`;
+const Search = styled.section`
+    padding: 2vh 0 2vh 0;
+    position: relative;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    input {
+        border: none;
+        border-bottom: 1px solid black;
+    }
+`;
 function Countries() {
     const [find, setFind] = useState("");
     const [filteredData, setFilteredData] = useState([]);
     const dataContext = useContext(Data.DataContext);
     const { state } = dataContext;
     const content = state.countries;
-    console.log(content);
+
     useEffect(() => {
         setFilteredData(
             content.filter((country) =>
@@ -19,34 +46,46 @@ function Countries() {
         );
     }, [find, content]);
 
-    const Div = styled.div`
-        padding: 20em 0 0 0;
-    `;
-
     return (
         <Div>
             <div>
-                <input
-                    type="text"
-                    placeholder="Search"
-                    value={find}
-                    onChange={(e) => setFind(e.target.value)}
-                />
-            </div>
-            <div>
-                {filteredData.map((r, i) => (
-                    <div key={i}>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img src={r.countryInfo.flag} variant="top" />
-                            <Card.Body>
-                                <Card.Title>{r.country}</Card.Title>
-                                <Link to={`/${r.country}`}>
-                                    <Button variant="primary">Visit</Button>
-                                </Link>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                ))}
+                <Search>
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        value={find}
+                        onChange={(e) => setFind(e.target.value)}
+                    />
+                </Search>
+                <Cards>
+                    {filteredData.map((r, i) => (
+                        <div key={i} style={{ padding: "2em" }}>
+                            <Link
+                                to={`/${r.country}`}
+                                style={{
+                                    textDecoration: "none",
+                                    color: "black",
+                                }}
+                            >
+                                <Card style={{ width: "18rem" }}>
+                                    <Card.Img
+                                        src={r.countryInfo.flag}
+                                        variant="top"
+                                    />
+                                    <Card.Body>
+                                        <Card.Title>{r.country}</Card.Title>
+                                        <Card.Text>
+                                            <h6>continent {r.continent}</h6>
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <h6>population : {r.population}</h6>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+                        </div>
+                    ))}
+                </Cards>
             </div>
         </Div>
     );
