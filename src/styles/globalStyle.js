@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing:border-box;
     }
     html,body{
-        width:auto;
+        width:100%;
         height:auto ;
     }
 
