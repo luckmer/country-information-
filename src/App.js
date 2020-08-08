@@ -6,7 +6,7 @@ import Nav from "./components/nav";
 function App() {
     const location = useLocation();
     return (
-        <>
+        <div>
             <Nav />
             <DataContext>
                 <Switch location={location} key={location.pathname}>
@@ -20,7 +20,7 @@ function App() {
                     ))}
                 </Switch>
             </DataContext>
-        </>
+        </div>
     );
 }
 
