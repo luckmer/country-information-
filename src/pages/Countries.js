@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as Data from "../data/Data";
+import { DataContext } from "../data/Data";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
 import styled from "styled-components";
-
+import { background, color, border } from "../styles/Box";
 const Div = styled.div`
     display: flex;
     flex-flow: row;
@@ -17,6 +17,10 @@ const Cards = styled.section`
     justify-content: space-around;
     padding: 60px;
     list-style: none;
+    a {
+        text-decoration: none;
+        color: ${color};
+    }
     div {
     }
 `;
@@ -26,24 +30,26 @@ const Search = styled.section`
     align-items: flex-end;
     justify-content: flex-end;
     input {
-        background: none;
         border: none;
-        border-bottom: 1px solid;
+        background-color: ${background};
+        border-bottom: 1px solid ${border};
+        color: ${color};
     }
 `;
 function Countries() {
     const [find, setFind] = useState("");
     const [filteredData, setFilteredData] = useState([]);
-    const dataContext = useContext(Data.DataContext);
+    const dataContext = useContext(DataContext);
     const { state } = dataContext;
     const content = state.countries;
 
     useEffect(() => {
-        setFilteredData(
-            content.filter((country) =>
-                country.toString().toLowerCase().includes(find)
-            )
-        );
+        const filter = content.filter((state) => {
+            return state.country
+                .toLowerCase()
+                .includes(find.toLocaleLowerCase());
+        });
+        setFilteredData(filter);
     }, [find, content]);
 
     return (
@@ -60,14 +66,8 @@ function Countries() {
                 <Cards>
                     {filteredData.map((r, i) => (
                         <div key={i} style={{ padding: "2em" }}>
-                            <Link
-                                to={`/${r.country}`}
-                                style={{
-                                    textDecoration: "none",
-                                    color: "black",
-                                }}
-                            >
-                                <Card style={{ width: "18rem" }}>
+                            <Link to={`/${r.country}`}>
+                                <Card style={{ width: "22rem" }}>
                                     <Card.Img
                                         src={r.countryInfo.flag}
                                         variant="top"
@@ -75,10 +75,10 @@ function Countries() {
                                     <Card.Body>
                                         <Card.Title>{r.country}</Card.Title>
                                         <Card.Text>
-                                            <h6>continent {r.continent}</h6>
+                                            continent {r.continent}
                                         </Card.Text>
                                         <Card.Text>
-                                            <h6>population : {r.population}</h6>
+                                            population : {r.population}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
