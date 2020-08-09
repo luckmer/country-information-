@@ -1,43 +1,9 @@
-import React, { useContext, useState } from "react";
-import { background, color, border } from "../styles/Box";
+import React, { useContext, useState, useEffect } from "react";
+import { Div, Search, Cards } from "../styles/CountryCss";
 import { DataContext } from "../data/Data";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styled from "styled-components";
-import CountryFilter from "../components/CountryFilter";
-
-const Div = styled.div`
-    display: flex;
-    flex-flow: row;
-    padding: 15vh 5vw 15vh 5vw;
-`;
-const Cards = styled.section`
-    height: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    padding: 60px;
-    list-style: none;
-    a {
-        text-decoration: none;
-        color: ${color};
-    }
-`;
-const Search = styled.section`
-    padding: 2vh 0 2vh 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 10vw;
-
-    input {
-        border: none;
-        background-color: ${background};
-        border-bottom: 1px solid ${border};
-        color: ${color};
-    }
-`;
 
 export default function Countries() {
     const [find, setFind] = useState("");
@@ -46,7 +12,12 @@ export default function Countries() {
     const { state } = dataContext;
     const content = state.countries;
 
-    CountryFilter(content, find, setFilteredData);
+    useEffect(() => {
+        const filter = content.filter((state) => {
+            return state.name.toLowerCase().includes(find.toLocaleLowerCase());
+        });
+        setFilteredData(filter);
+    }, [find, content, setFilteredData]);
 
     return (
         <Div>
@@ -63,21 +34,15 @@ export default function Countries() {
                 </Search>
                 <Cards>
                     {filteredData.map(
-                        (
-                            { country, continent, population, countryInfo },
-                            i
-                        ) => (
+                        ({ name, population, flag, capital }, i) => (
                             <div key={i} style={{ padding: "2em" }}>
-                                <Link to={`/${country}`}>
+                                <Link to={`/${name}`}>
                                     <Card style={{ width: "18rem" }}>
-                                        <Card.Img
-                                            src={countryInfo.flag}
-                                            variant="top"
-                                        />
+                                        <Card.Img src={flag} variant="top" />
                                         <Card.Body>
-                                            <Card.Title>{country}</Card.Title>
+                                            <Card.Title>{name}</Card.Title>
                                             <Card.Text>
-                                                continent {continent}
+                                                Capital {capital}
                                             </Card.Text>
                                             <Card.Text>
                                                 population : {population}
