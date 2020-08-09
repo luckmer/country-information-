@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import { routes } from "./routes";
 import DataContext from "./data/Data";
@@ -11,10 +11,16 @@ function App() {
         mode: "light",
     });
     const Color = type.mode;
+    useEffect(() => {
+        localStorage.setItem("color", JSON.stringify(type));
+    }, [type]);
+    localStorage.getItem("color");
+    console.log(localStorage);
 
     const toggleChange = () => {
         setType({ mode: Color === "light" ? "dark" : "light" });
     };
+
     return (
         <ThemeProvider theme={{ mode: Color }}>
             <Box>
