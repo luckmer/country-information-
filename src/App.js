@@ -15,7 +15,6 @@ function App() {
         localStorage.setItem("color", JSON.stringify(type));
     }, [type]);
     localStorage.getItem("color");
-    console.log(localStorage);
 
     const toggleChange = () => {
         setType({ mode: Color === "light" ? "dark" : "light" });
