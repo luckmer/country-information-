@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { background, color } from "../styles/Box";
+import { background } from "../styles/Box";
 const GlobalStyle = createGlobalStyle`
     *{
         padding: 0;
