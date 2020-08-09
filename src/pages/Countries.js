@@ -11,7 +11,7 @@ const Div = styled.div`
     padding: 15vh 5vw 15vh 5vw;
 `;
 const Cards = styled.section`
-    height: 20vh;
+    height: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -25,10 +25,10 @@ const Search = styled.section`
     position: relative;
     align-items: flex-end;
     justify-content: flex-end;
-
     input {
+        background: none;
         border: none;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid;
     }
 `;
 function Countries() {
