@@ -8,6 +8,7 @@ function Data(props) {
 
     useEffect(() => {
         axios.get(url).then((res) => {
+            console.log(res.data);
             const countries = res.data;
             setState({ countries });
         });
