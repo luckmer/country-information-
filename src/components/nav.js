@@ -16,7 +16,6 @@ const NavBar = styled.nav`
         box-shadow: none;
     }
 `;
-
 const Header = styled.header`
     padding 0 10vw 0 10vw;
     display: flex;
@@ -39,12 +38,11 @@ const Header = styled.header`
         background:none;
     }
     li {
-        ${"" /* color:#0056b3; */}
+        color: ${color};
         cursor: pointer;
         justify-content: center;
         font-weight: bold;
     }
-
     @media (max-width: 850px) {
         padding: 7vh 2vw 7vh 3vw;
         align-items: center;
@@ -79,7 +77,7 @@ const Hamburger = styled.div`
             border-radius: 10px;
             transform-origin: 1px;
             transition: all 1s ease;
-            background-color: ${({ state }) => (state ? "white" : "#3C556E")};
+            background-color: ${({ state }) => (state ? "black" : "#3C556E")};
         }
     }
 `;
@@ -90,7 +88,6 @@ const handleClick = () => {
 
 function Nav(props) {
     const [state, setState] = useState(false);
-
     return (
         <NavBar>
             <Hamburger state={state} onClick={() => setState(!state)}>
@@ -105,7 +102,9 @@ function Nav(props) {
                     </Link>
                 </ul>
                 <ul>
-                    <button onClick={props.toggleChange}>dark </button>
+                    <button onClick={props.toggleChange}>
+                        <li>dark</li>
+                    </button>
                 </ul>
                 <ul>
                     <li onClick={handleClick}>Home </li>
