@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { DataContext } from "../data/Data";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Card } from "react-bootstrap";
-import styled from "styled-components";
+import React, { useContext, useState } from "react";
 import { background, color, border } from "../styles/Box";
+import { DataContext } from "../data/Data";
+import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styled from "styled-components";
+import CountryFilter from "../components/CountryFilter";
+
 const Div = styled.div`
     display: flex;
     flex-flow: row;
@@ -21,14 +23,14 @@ const Cards = styled.section`
         text-decoration: none;
         color: ${color};
     }
-    div {
-    }
 `;
 const Search = styled.section`
     padding: 2vh 0 2vh 0;
-    position: relative;
-    align-items: flex-end;
-    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+
     input {
         border: none;
         background-color: ${background};
@@ -36,59 +38,58 @@ const Search = styled.section`
         color: ${color};
     }
 `;
-function Countries() {
+
+export default function Countries() {
     const [find, setFind] = useState("");
     const [filteredData, setFilteredData] = useState([]);
     const dataContext = useContext(DataContext);
     const { state } = dataContext;
     const content = state.countries;
 
-    useEffect(() => {
-        const filter = content.filter((state) => {
-            return state.country
-                .toLowerCase()
-                .includes(find.toLocaleLowerCase());
-        });
-        setFilteredData(filter);
-    }, [find, content]);
+    CountryFilter(content, find, setFilteredData);
 
     return (
         <Div>
             <div>
                 <Search>
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        value={find}
-                        onChange={(e) => setFind(e.target.value)}
-                    />
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={find}
+                            onChange={(e) => setFind(e.target.value)}
+                        />
+                    </div>
                 </Search>
                 <Cards>
-                    {filteredData.map((r, i) => (
-                        <div key={i} style={{ padding: "2em" }}>
-                            <Link to={`/${r.country}`}>
-                                <Card style={{ width: "22rem" }}>
-                                    <Card.Img
-                                        src={r.countryInfo.flag}
-                                        variant="top"
-                                    />
-                                    <Card.Body>
-                                        <Card.Title>{r.country}</Card.Title>
-                                        <Card.Text>
-                                            continent {r.continent}
-                                        </Card.Text>
-                                        <Card.Text>
-                                            population : {r.population}
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </Link>
-                        </div>
-                    ))}
+                    {filteredData.map(
+                        (
+                            { country, continent, population, countryInfo },
+                            i
+                        ) => (
+                            <div key={i} style={{ padding: "2em" }}>
+                                <Link to={`/${country}`}>
+                                    <Card style={{ width: "18rem" }}>
+                                        <Card.Img
+                                            src={countryInfo.flag}
+                                            variant="top"
+                                        />
+                                        <Card.Body>
+                                            <Card.Title>{country}</Card.Title>
+                                            <Card.Text>
+                                                continent {continent}
+                                            </Card.Text>
+                                            <Card.Text>
+                                                population : {population}
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Link>
+                            </div>
+                        )
+                    )}
                 </Cards>
             </div>
         </Div>
     );
 }
-
-export default Countries;
