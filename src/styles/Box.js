@@ -22,7 +22,7 @@ const Box = styled.div`
     transition: all 0.5s linear;
     .card {
         border: none;
-        background-color: black;
+        box-shadow: 11px 11px 52px -14px rgba(0, 0, 0, 0.2);
     }
     .card-body {
         background-color: ${background};
