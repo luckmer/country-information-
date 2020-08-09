@@ -2,13 +2,13 @@ import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const DataContext = createContext();
-const url = `https://corona.lmao.ninja/v2/countries`;
+const url = `https://restcountries.eu/rest/v2/all`;
+
 function Data(props) {
     const [state, setState] = useState({ countries: [] });
 
     useEffect(() => {
         axios.get(url).then((res) => {
-            console.log(res.data);
             const countries = res.data;
             setState({ countries });
         });
