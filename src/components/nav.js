@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { background } from "../styles/Box";
 const NavBar = styled.nav`
+    background-color: ${background};
     position: fixed;
     width: 100%;
-    z-index: 999;
+    z-index: 1000;
     padding: 2vh 5vw 2vh 5vw;
-    background-color: white;
     top: 0;
     left: 0;
     box-shadow: 11px 11px 52px -14px rgba(0, 0, 0, 0.2);
@@ -23,25 +24,24 @@ const Header = styled.header`
     justify-content: space-between;
     font-family: "Maragsa";
     font-size: 24px;
-    a {
-        text-decoration: none;
-        color: white;
-    }
     ul {
         padding: 0 2vw 0 2vw;
         margin: 1vh 0 1vh 0;
         list-style: none;
     }
+    button{
+        ${"" /* color:#0056b3; */}
+        border:none;
+        background:none;
+    }
     li {
-        color: black;
+        ${"" /* color:#0056b3; */}
         cursor: pointer;
         justify-content: center;
         font-weight: bold;
     }
 
     @media (max-width: 850px) {
-
-        background-color:black;
         padding: 7vh 2vw 7vh 3vw;
         align-items: center;
         flex-flow: column nowrap;
@@ -53,9 +53,7 @@ const Header = styled.header`
         right: 0;
         width: 40vw;
         transition: transform 0.3s ease-in-out;
-        li{
-            color:white;
-        }
+    
     }
 `;
 
@@ -86,8 +84,9 @@ const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-function Nav() {
+function Nav(props) {
     const [state, setState] = useState(false);
+
     return (
         <NavBar>
             <Hamburger state={state} onClick={() => setState(!state)}>
@@ -101,8 +100,11 @@ function Nav() {
                         <li>Check Country </li>
                     </Link>
                 </ul>
-                <ul onClick={handleClick}>
-                    <li>Home </li>
+                <ul>
+                    <button onClick={props.toggleChange}>dark </button>
+                </ul>
+                <ul>
+                    <li onClick={handleClick}>Home </li>
                 </ul>
             </Header>
         </NavBar>
