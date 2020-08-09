@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-
 const GlobalStyle = createGlobalStyle`
     *{
         padding:0;
@@ -8,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     }
     html,body{
         width:100%;
-        height:auto ;
+        min-height:100vh;
     }
 
 `;
