@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { background } from "../styles/Box";
+import { background, color } from "../styles/Box";
 const NavBar = styled.nav`
     background-color: ${background};
     position: fixed;
@@ -24,13 +24,17 @@ const Header = styled.header`
     justify-content: space-between;
     font-family: "Maragsa";
     font-size: 24px;
+    a {
+        color: ${color};
+        text-decoration: none;
+    }
     ul {
         padding: 0 2vw 0 2vw;
         margin: 1vh 0 1vh 0;
         list-style: none;
     }
     button{
-        ${"" /* color:#0056b3; */}
+        color: ${color};
         border:none;
         background:none;
     }
