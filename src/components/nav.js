@@ -34,7 +34,6 @@ function Nav(props) {
                 </ul>
                 <ul>
                     <li
-                        scroll={scroll}
                         onClick={handleClick}
                         style={{ display: scroll ? "block" : "none" }}
                     >

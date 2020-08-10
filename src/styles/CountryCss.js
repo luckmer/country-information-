@@ -7,11 +7,11 @@ export const Div = styled(motion.div)`
     padding: 15vh 5vw 15vh 5vw;
 `;
 export const Cards = styled(motion.section)`
+    background: none;
     height: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    padding: 60px;
     list-style: none;
     a {
         text-decoration: none;
@@ -19,15 +19,24 @@ export const Cards = styled(motion.section)`
     }
 `;
 export const Search = styled.section`
-    padding: 2vh 0 2vh 0;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    width: 10vw;
     input {
         border: none;
         background-color: ${background};
         border-bottom: 1px solid ${border};
         color: ${color};
+    }
+    @media screen and (max-width: 850px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        input {
+            border: none;
+            background-color: ${background};
+            border-bottom: 1px solid ${border};
+            color: ${color};
+        }
     }
 `;

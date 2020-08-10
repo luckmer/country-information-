@@ -55,7 +55,7 @@ export default function Countries() {
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 1.1 }}
                                 key={i}
-                                style={{ padding: "2em" }}
+                                style={{ padding: "2em 0 0 0" }}
                             >
                                 <Link to={`/${name}`}>
                                     <Card style={{ width: "18rem" }}>

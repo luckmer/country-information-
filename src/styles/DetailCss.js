@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { color } from "../styles/Box";
+import { color, background } from "../styles/Box";
 import { motion } from "framer-motion";
 export const Container = styled.section`
     padding: 15vh 5vw 2vh 5vw;
     width: 100%;
     height: 100vh;
     display: grid;
+    background: ${background};
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
     grid-template-rows: auto;
@@ -47,7 +48,7 @@ export const Content = styled.div`
         display: flex;
         justify-content: flex-end;
     }
-    @media (max-width: 850px) {
+    @media screen and (max-width: 850px) {
         header {
             justify-content: center;
         }
