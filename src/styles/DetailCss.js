@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { color } from "../styles/Box";
+import { motion } from "framer-motion";
 export const Container = styled.section`
     padding: 15vh 5vw 2vh 5vw;
     width: 100%;
@@ -25,7 +26,7 @@ export const Container = styled.section`
             " content content content  content ";
     }
 `;
-export const Img = styled.div`
+export const Image = styled(motion.div)`
     grid-area: image;
     border-radius: 5px;
     img {

@@ -1,11 +1,12 @@
 import { background, color, border } from "./Box";
+import { motion } from "framer-motion";
 import styled from "styled-components";
-export const Div = styled.div`
+export const Div = styled(motion.div)`
     display: flex;
     flex-flow: row;
     padding: 15vh 5vw 15vh 5vw;
 `;
-export const Cards = styled.section`
+export const Cards = styled(motion.section)`
     height: 100%;
     display: flex;
     flex-flow: row wrap;
