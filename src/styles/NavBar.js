@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { background, color } from "./Box";
 export const NavBar = styled.nav`
+    background: ${background};
     position: fixed;
     width: 100%;
     z-index: 1000;
@@ -74,7 +75,7 @@ export const Hamburger = styled.div`
             border-radius: 10px;
             transform-origin: 1px;
             transition: all 1s ease;
-            background-color: ${({ state }) => (state ? "black" : "#3C556E")};
+            background-color: ${({ state }) => (state ? "white" : " blue")};
         }
     }
 `;

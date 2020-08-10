@@ -7,6 +7,7 @@ export const Div = styled(motion.div)`
     padding: 15vh 5vw 15vh 5vw;
 `;
 export const Cards = styled(motion.section)`
+    padding: 2em 0 0 0;
     background: none;
     height: 100%;
     display: flex;
