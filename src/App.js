@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { ThemeProvider } from "styled-components";
 import { routes } from "./routes";
 import DataContext from "./data/Data";
 import Nav from "./components/nav";
-import { ThemeProvider } from "styled-components";
 import Box from "./styles/Box";
 function App() {
     const location = useLocation();
@@ -25,16 +26,18 @@ function App() {
             <Box>
                 <Nav type={Color} toggleChange={toggleChange} />
                 <DataContext>
-                    <Switch location={location} key={location.pathname}>
-                        {routes.map(({ path, Component }) => (
-                            <Route
-                                key={path}
-                                exact
-                                path={path}
-                                component={Component}
-                            />
-                        ))}
-                    </Switch>
+                    <AnimatePresence initial={false} exitBeforeEnter>
+                        <Switch location={location} key={location.pathname}>
+                            {routes.map(({ path, Component }) => (
+                                <Route
+                                    key={path}
+                                    exact
+                                    path={path}
+                                    component={Component}
+                                />
+                            ))}
+                        </Switch>
+                    </AnimatePresence>
                 </DataContext>
             </Box>
         </ThemeProvider>
