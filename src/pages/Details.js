@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../data/Data";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
     Container,
-    Img,
+    Image,
     Content,
     Ul,
     Languages,
@@ -21,14 +22,36 @@ export default function Details(props) {
         );
         setState({ content: projectID });
     }, [contextType.state.countries, props.match.params.id]);
+    const transition = {
+        duration: 1.4,
+        ease: [0.6, 0.01, -0.05, 0.9],
+    };
+
+    const fadeIn = {
+        initial: { x: "-100vw" },
+        animate: {
+            x: 0,
+            transition: { duration: 1, ...transition },
+        },
+        exit: {
+            x: "-100vw",
+            transition: { duration: 1, ...transition },
+            opacity: 0,
+        },
+    };
 
     return (
-        <>
+        <motion.div
+            variants={fadeIn}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
             {content.map((i, j) => (
                 <Container key={j}>
-                    <Img>
+                    <Image>
                         <img src={i.flag} alt="" />
-                    </Img>
+                    </Image>
                     <Content>
                         <header>
                             <h4>{i.name}</h4>
@@ -71,6 +94,6 @@ export default function Details(props) {
                     </Exit>
                 </Container>
             ))}
-        </>
+        </motion.div>
     );
 }
