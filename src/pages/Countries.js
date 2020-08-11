@@ -4,7 +4,7 @@ import Paginating from "../components/Pagination";
 import { DataContext } from "../data/Data";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import CountryContent from "../components/Test";
+import CountryContent from "../components/CountryContent";
 function Countries() {
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage] = useState(50);
