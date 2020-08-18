@@ -12,10 +12,15 @@ function App() {
         mode: "light",
     });
     const Color = type.mode;
+
+    useEffect(() => {
+        const store = JSON.parse(localStorage.getItem("color"));
+        if (store) setType(store);
+    }, []);
+
     useEffect(() => {
         localStorage.setItem("color", JSON.stringify(type));
     }, [type]);
-    localStorage.getItem("color");
 
     const toggleChange = () => {
         setType({ mode: Color === "light" ? "dark" : "light" });
