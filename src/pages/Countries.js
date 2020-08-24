@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Div, Search, Cards } from "../styles/CountryCss";
+import { AnimDiv } from "../animations/CountryAnim";
 import Paginating from "../components/Pagination";
 import { DataContext } from "../data/Data";
 import { motion } from "framer-motion";
@@ -11,8 +12,7 @@ function Countries() {
     const [find, setFind] = useState("");
     const [filteredData, setFilteredData] = useState([]);
     const { currentPost, paginate } = PageControl();
-    const dataContext = useContext(DataContext);
-    const { state } = dataContext;
+    const { state } = useContext(DataContext);
     const content = state.countries;
 
     useEffect(() => {
@@ -22,13 +22,8 @@ function Countries() {
         setFilteredData(filter);
     }, [find, content, setFilteredData]);
 
-    const transition = { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] };
     return (
-        <Div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 1, ...transition } }}
-            exit={{ opacity: 0 }}
-        >
+        <Div initial="initial" animate="animate" exit="exit" variants={AnimDiv}>
             <motion.div>
                 <Search>
                     <div>
